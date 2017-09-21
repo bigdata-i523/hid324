@@ -9,7 +9,7 @@
 ```
 owner:
     hid: 324
-    name: kuppuraj, ashok
+    name: Ashok Kuppuraj
     url: https://github.com/bigdata-i523/hid324
 ```
 
@@ -18,14 +18,12 @@ owner:
 ```
 paper1:
    author: 
-   - Gregor von Laszewski
-   - Fugang Wang
+   - Ashok Kuppuraj
    hid:
-   - 000
-   - 001
-   title: This is my paper about Bigdata in Blockchain
+   - 324
+   title: Big data in Blockchain
    abstract: This paper showcases this and that and the other
-   url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
+   url: https://github.com/bigdata-i523/hid324/paper1/paper1.pdf
    type: latex
    status: in progress
 ```
@@ -35,12 +33,12 @@ paper1:
 ```
 paper2:
    author: 
-   - Gregor von Laszewski
+   - Ashok Kuppuraj
    hid:
-   - 000
+   - 324
    title: This is my paper about the other abc
    abstract: This paper showcases tis and that and the other in regards to abc
-   url: https://github.com/bigdata-i523/sample-hid000/paper2/paper2.pdf   
+   url: https://github.com/bigdata-i523/hid324/paper2/paper2.pdf   
    type: word
 ```
 
@@ -54,12 +52,12 @@ paper2:
    type: project
    type: report
    author: 
-   - Gregor von Laszewski
+   - Ashok Kuppuraj
    hid:
-   - 000
-   title: Benchmarking a BigData Docker deployment
-   abstract: This paper showcases tis and that and the other 
-   url: https://github.com/bigdata-i523/sample-pid000/project/report.pdf
+   - 324
+   title: TBD
+   abstract: TBD
+   url: https://github.com/bigdata-i523/pid000/project/report.pdf
    type: latex
 ```
    
