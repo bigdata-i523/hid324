@@ -23,7 +23,7 @@ paper1:
    hid:
    - 000
    - 001
-   title: This is my paper about xyz
+   title: This is my paper about Bigdata in Blockchain
    abstract: This paper showcases this and that and the other
    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
    type: latex
