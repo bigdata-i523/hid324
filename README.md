@@ -22,7 +22,7 @@ paper1:
    hid:
    - 324
    title: Big data in Blockchain
-   abstract: This paper showcases this and that and the other
+   abstract: This paper helps us to understand the opportunities of Big data tools in blockchain implementations
    url: https://github.com/bigdata-i523/hid324/paper1/paper1.pdf
    type: latex
    status: in progress
@@ -36,8 +36,8 @@ paper2:
    - Ashok Kuppuraj
    hid:
    - 324
-   title: This is my paper about the other abc
-   abstract: This paper showcases tis and that and the other in regards to abc
+   title: Big data in Elections process 
+   abstract: This paper showcases how we can change the way election happens in the current world
    url: https://github.com/bigdata-i523/hid324/paper2/paper2.pdf   
    type: word
 ```
