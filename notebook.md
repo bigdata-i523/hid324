@@ -17,6 +17,7 @@
 # Practice
 
 * 08/25/17 Enabled Python 2 and 3 via pyenv on OSX
+* 09/06/17 Installed Anaconda and PyCharm
 
 # Writing
 
