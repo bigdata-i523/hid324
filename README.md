@@ -17,7 +17,7 @@ paper1:
    - Ashok Kuppuraj
    hid:
    - 324
-   title: Big data in Blockchain
+   title: Big data and Analytics in Blockchain
    abstract: This paper helps us to understand the opportunities of Big data tools in blockchain implementations
    url: https://github.com/bigdata-i523/hid324/paper1/paper1.pdf
    type: latex
