@@ -4,7 +4,8 @@ owner:
     name: Ashok Kuppuraj
     url: https://github.com/bigdata-i523/hid324
 paper1:
-    abstract: This paper helps us to understand the opportunities of Big data tools
+    abstract: >
+        This paper helps us to understand the opportunities of Big data tools
         in blockchain implementations
     author:
         - Ashok Kuppuraj
