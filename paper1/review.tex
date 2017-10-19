@@ -66,7 +66,7 @@ For example, consider Bitcoin, the overall transaction timing is very fewer in-t
 \subsection{Transaction processing}
 To deal with improving the transaction speed of a peer-to-peer network, first it is required to streamline the asynchronous process of gossip protocols, handshake between peers to increase the transaction processing speed, also by removing the block size limits\cite{Optimize-bitcoin} we can increase the frequency of the block building, these optimizations can be easily achieved with the help of Big data queuing utilities like Apache Kafka by creating individual topics for each set of Broadcasting, Block Acknowledgement, and consensus sharing between the peers,   and second is to increase the Hash processing capacity by horizontal scaling with the help of Apache Spark or Apache Flink. By using these open source tools for hash processing, it is not required to invest on high-value GPU's to process data.
 
-For an instance, Kafka can handle up to 200,000 messages/second (220MB/second)\cite{kafka-performance}, which is way more than any other existing banking can provide.
+For an instance, Kafka can handle up to 200,000 messages/second (220MB/second)\cite{kafka_performance}, which is way more than any other existing banking can provide.
 
 
 
@@ -92,5 +92,5 @@ Although Blockchain provides the solution for  Real life problems, it would be n
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
 
-\end{document}
+\input{bibtex-error}\input{issues}\end{document}
 
