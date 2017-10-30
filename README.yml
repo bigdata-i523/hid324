@@ -5,8 +5,7 @@ owner:
     url: https://github.com/bigdata-i523/hid324
 paper1:
     abstract: >
-        This paper helps us to understand the opportunities of Big data tools
-        in blockchain implementations
+        Big data and its technologies helps in augmenting and improving the current Block chain technology and overcome the problems around it.
     author:
         - Ashok Kuppuraj
     chapter: Theory
