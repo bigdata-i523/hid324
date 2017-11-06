@@ -2,40 +2,22 @@
 
 \input{format/i523}
 
+
+
 \begin{document}
-\title{Big Data for Edge Computing}
+\title{Big Data in Decentralized election}
 
 
-\author{Ben Trovato}
+\author{Ashok Kuppuraj}
 \orcid{1234-5678-9012}
 \affiliation{%
-  \institution{Institute for Clarity in Documentation}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin} 
-  \state{Ohio} 
-  \postcode{43017-6221}
-}
-\email{trovato@corporation.com}
-
-\author{G.K.M. Tobin}
-\affiliation{%
-  \institution{Institute for Clarity in Documentation}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin} 
-  \state{Ohio} 
-  \postcode{43017-6221}
-}
-\email{webmaster@marysville-ohio.com}
-
-\author{Gregor von Laszewski}
-\affiliation{%
   \institution{Indiana University}
-  \streetaddress{Smith Research Center}
+  \streetaddress{}
   \city{Bloomington} 
-  \state{IN} 
-  \postcode{47408}
-  \country{USA}}
-\email{laszewski@gmail.com}
+  \state{Indiana} 
+  \postcode{43017-6221}
+}
+\email{akuppura@iu.edu}
 
 
 % The default list of authors is too long for headers}
@@ -43,100 +25,90 @@
 
 
 \begin{abstract}
-This paper provides a sample of a \LaTeX\ document which conforms,
-somewhat loosely, to the formatting guidelines for
-ACM SIG Proceedings.
+In the current world of technology, lots of legacy practices are modernized, some are yet to modernize and some are extinct. Though lots of inventions and modernization are happening in every spectrum of life, the election process in a democratic political system is yet to attain the quantum of modernization. In the era of Big data and technologies, how the election process can be made efficient, accountable and decentralized.
 \end{abstract}
 
-\keywords{Big Data, Edge Computing i523}
+\keywords{i523, hid324, Big data, Election, India, U.S, Blockchain, Infrastructure}
 
 
 \maketitle
 
-
-
 \section{Introduction}
+Election is a formal decision-making process by a population to make a representation of them in a democratic system, this process of electing an an individual is called as Representative Democracy.
+The election is one of the important activity in fulfillment of an individual's need, it is based on the fact that "Majority rule"\cite{1:online}, the theory holds good from cells in the human body to the transaction validations in Blockchain.  In the current digital world, this is still a slow, untrustworthy process. With all the implementation aspects, Big data and Blockchain can help modernizing the election process to more secure, trustworthy, foolproof, instant and decentralized process. In today's world the election results are impacted by big data why can't the election itself impacted by it for its own good.
 
-Put here an introduction about your topic. 
-We just need one sample refernce so the paper compiles in LaTeX so we
-put it here \cite{editor00}.
 
-\section{figures}
+\section{Election in India and U.S}
+ The election is the systematic process of selecting an individual to represent an entire population, though some countries don't follow the same process most of the countries have a process of election\cite{2:online}.
+ A good example to consider for democratic countries are India and U.S.A, the former one is the largest democracy in the world and the later one is the oldest democracy in the world. Especially in India, with a population of more than 1 billion\cite{3:online} execution of  election is a tedious and costly process. In the beginning of this decade, both the countries witnessed the implications of Big data and its technologies along with Internet made a decisive role in the outcome of the election. In the year 2014 and 2016 for India and U.S respectively, political parties won the election with the help of Big data and analytics\cite{6}.
+ 
+ \subsection{Big data in Indian Election}
+ India is known for its diversity in terms of population, language, and culture. Conducting election to such a diversified country is itself is a big challenge with the current technological advancement. For an instance lets consider the size of the Indian electorate, with the sheer volume of 814.5 million voters from 29 states and 12 different languages itself is a good use case for Big data\cite{7:online}.
+ In a political party perspective, they had to process millions of Information sets from Twitter, Facebook to browser cookies and newspaper sales data to understand the right place for canvassing, raising funds and improving the face value, etc. And all these have to be done at a specific point of time to derive a relevant output. In an Election commission's perspective, which is an independent authority to conduct the election, the data generation starts from the first day of announcing the election date. It begins with applications of the contestants in multiple languages, its validation,  voters IDs, EVM(Electronic Voting machine) data, votes aggregation, validation all involves a tremendous amount of data.
+ 
+ 
+ \subsection{Big data in U.S Election}
+ 
+ U.S is one of the advanced countries in terms of election process, similar to any other democratic country, it has Federal election commission which will conduct elections, with 115 million voters and with 87.36\% internet penetration \cite{8:online}, data generated for the campaigning, voter validation, polling adds up to the big data use case. 
+ The aftermath of 2016 US election showed the prowess of Big data and analytics. For the predictions and campaigns, political parties amassed more than 5000 data points about the behavioral patterns from Healthcare to car ownership data, purchased Digital trails, Facebook behavioral patterns to target potential voters, increase the awareness penetration and predict the results with data points backing it\cite{9:online}.
+ 
+ In both countries, the digital imprint of elections was around big data and its technologies. However, the technology has only reached a single side of the river. The Political campaign, advertisement started using all sorts of advanced technology, but the voting itself hasn't been improved, it is still slow to implement, results take several days to announce and very costly to implement over a vast region.
+ 
+ \section{Problems with Election process}
+Before a solution in Big data, what are the possible problems in election, who are the stakeholders impacted and what is the integrity of an election result, all these come into the picture.
+Here, we group the problems by stakeholder. There are three stakeholders in the election process, first is the Independent agency conducting the election, Political party and people, who cast their vote.
 
-In Figure \ref{f:fly} we show a fly. Please note that because we use
-just columwidth that the size of the figure will change to the
-columnwidth of the paper once we change the layout to final. CHnaging
-the layout to final should not be done by you. All figures will be
-listed at the end.
+In the people's perspective, they have to travel to a commonplace in their locality and stand in a long queue to cast vote and might be deceived by advertisement, biased media and they select their representative purely based on trust. Once the vote is cast, there is no way for the people to revert it or alter it and the politician don't have any liability till the next term. In practical terms, there are no means for the people to evaluate a candidate post-election performance and the frequency to do the same is so high that the people have to wait for the next term, which will be 4-5 years.
 
-\begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{images/fly.pdf}
-  \caption{Example caption}\label{f:fly}
-\end{figure}
+In Election commission perspective, their sole purpose is to maintain the integrity of the election, so that the majority's decision reflects in the result. The major problem is the authenticity of voters and contestants, second is logistics and communication,i.e bringing the people from geographically and culturally location on common terms, third is to make sure the casted votes are untampered and the last one delayed delay in result announcement.
 
-When copying the example, please do not check in the images from the
-examples into your images directory as you will not need them for your
-paper. Instead use images that you like to include. If you do not have
-any images, do not dreate the images folder.
+In contestant perspective, all contestant should have a level playing ground irrespective of the competition's fame and wealth.
 
-\section{Tables}
+And, the turnout volume of election is low that there is a high possibility that its basic motivation might fail. If the turnout is less than 50\%, then there is a high possibility that the entire election might go wrong. For example, in 2016 U.S election, the turnout is 55.5\% \cite{10:article}, in India, the same in 2014 is 66.40 \% \cite{11:online}.
 
-In case you need to create tables, you can do this with online tools
-(if you do not mind sharing your data) such as
-\url{https://www.tablesgenerator.com/} or other such tools (please
-google for them). They even allow you to manage tables as CSV.
 
-or generate them by hand while using the provided template in Table\ref{t:mytable}. Not ethat
-the caption is before the tabular environment.
 
-\begin{table}[htb]
-\centering
-\caption{My caption}
-\label{t:mytabble}
-\begin{tabular}{lll}
-1 & 2 & 3 \\
-\hline
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{tabular}
-\end{table}
+\section{Big data in Decentralized Election}
+As election is a staged approach, its solution would be staged as well.
 
-\section{Long example}
+\subsection{Voter/Contestant selection}
 
-If you like to see a more elaborate example, please look at
-report-long.tex. 
+In the Big data terms, the voter selection can be synonyms with data ingestion into a data lake or no-SQL database. In technical terms, we have to persist not more than 1.2 billion records, considering the population of India. By efficiently sharding it per state, we can easily persist such volume of data into a distributed storage. This is already implemented in some of the countries like U.S 
+in the name of SSN\cite{15:online} and in India, it is  Aadhaar ID\cite{13:online}.
+We can easily read and filter out the voters based on their criminal records whether they are eligible for voting or contesting or not.
+
+
+\subsection{Voting}
+
+Voting, in simple terms, can be associated with aggregation/summing based on the key. Here the key is the contestant's symbol or name. By hosting this voting process in a website portal with API calls and load balancers, we can stream the votes and aggregate while it streamed to a persistent data store. With this approach, we can decentralize voting process. We can deter abusing this model by windowing the voting time. Upon completion of the window, we can reuse the infrastructure for other e-governance projects or we can reuse the e-governance infrastructure for this by using YARN as the resource manager, this can be possible even with streaming apps. 
+Per the benchmarking done at MongoDB, we can attain up to 100k/second inserts \cite{14:techreport}. By optimizing the insert, load balancing the API  and sharding based on different mediums and methods, we can build an architecture to withstand such high load in a short span of time. However, the validation of voters has to be completed before casting.
+
+\subsection{Election result}
+In continuation with the voting implementation of big data technologies, results announcement is just an aggregation call over the database. In the current world, the vote calculation takes a day to announce the results. With the big data in place, the result can be published on the same day or in near real time.
+
+\subsection{Election Frequency}
+Election frequency is proportional to the terms of the contestant for a given position. As the democratic principle believes that the people rule themselves, what if the representative after winning the election did not fulfill the expectations, people have to wait for the next term to make any change and it is not feasible financial wise. With the big data in place and resource being available, we can increase the frequency of election, so that the representative is accountable for the promises. For example, if we have a terms set for 5 years, every one year once, performance verification can be done in the form of a negative vote to the selected contestant and if the count is less than 50\% of his/her total vote count, the contestant can be disqualified.
+
+
+\section{Blockchain in Decentralized Election}
+As the Blockchain is known for the security and reliability, it can be leveraged along with big data technologies to implement a secure election on a decentralized infrastructure. The idea is that all the eligible voter will be provided with a token before a day of actual polling. When the window for polling begins, you can transfer the token with the candidate's value, it can be a number or a code to a common address. Upon calculation of valid ones, the token can be sent back for the next set of the election. As the blockchain is protected mathematically, we can ensure the authenticity of voting and an individual can be sure that his/her vote is a validated one. Also, an audit trail can be persisted to check on voting fraud. The election commission, can easily validate the tokens, aggregate the votes and announce the results\cite{17}.  
+For example, FollowMyVote proposes voting entirely on Blockchain. The anonymity of voter is maintained by Elliptic curve Cryptography\cite{16:online}, the transaction and consensus similar to Bitcoin network. And, BitCongress propose a system combining Bitcoin, Counterparty and Smart contracts. It proposes a token called VOTE, which can be transferred to the contestants and by the end of election, the token will be transferred back.
+
+Though the stability of Blockchain over the volume of a national election is not well tested or implemented. By augmenting with the Big data technologies like streaming and in-memory processing, this can be achieved in future. Once established, multiple countries can conduct an election on a single infrastructure without the fear of hacking or tampering.
 
 \section{Conclusion}
+The election process is in need of dramatic modernization, though it is evolving in a pace different from the current world. To synchronize it with the current, there is a desperate need to implement this ancient system of democracy with the help of Big data and Blockchain. And by decentralizing it, the infrastructure of election can be utilized for other e-governance applications.
 
-Put here an conclusion. Conlcusions and abstracts must not have any
-citations in the section.
 
 
 \begin{acks}
 
   The authors would like to thank Dr. Gregor von Laszewski for his
   support and suggestions to write this paper.
-
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
-
-\appendix
-
-We include an appendix with common issues that we see when students
-submit papers. One particular important issue is not to use the
-underscore in bibtex labels. Sharelatex allows this, but the
-proceedings script we have does not allow this.
-
-When you submit the paper you need to address each of the items in the
-issues.tex file and verify that you have done them. Please do this
-only at the end once you have finished writing the paper. To d this
-cange TODO with DONE. However if you check something on with DONE, but
-we find you actually have not executed it correcty, you will receive
-point deductions. Thus it is important to do this correctly and not
-just 5 minutes before the deadline. It is better to do a late
-submission than doing the check in haste. 
 
 \input{issues}
 
