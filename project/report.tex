@@ -46,8 +46,8 @@ In technical terms, Bitcoin's is a shared ledger or a database running by a set 
  \subsection{Data Source}
  As Bitcoin is a decentralized and a transparent system, all the source of data can be gathered from the peer-to-peer networks. This peer-to-peer network is called as Bitcoin-mining pool \cite{1:online}
  The rate of block creation is adjusted every 2016 blocks to aim for a constant two week adjustment period (equivalent to 6 per hour.) The number of Bitcoins generated per block is set to decrease geometrically, with a 50 reduction every 210,000 blocks, or approximately four years. The result is that the number of bitcoins in existence is not expected to exceed 21 million \cite{2:online}.
-The true source of data for Bitcoin analysis would be from Bitcoin mining pool. Coinbase is one of the main member bitcoin pool from which we can gather mining statistics. Here the data is sourced from a data service called Quandl. Quandl provides the variety of data services in the form of https web services. As we are in the process of identifying the features impacting Bitcoin's price fluctuations, not only the transaction volume impacts, even the popularity and people's trend towards it impact the price of the coins. Hence, data from Google is also gathered. As a currency's price also been altered by its exchange, supply and demand, Ethereum's price data and transactional data is also acquired from Ethereum's exchange point.
-With all these data sources, we analyse the features impacting the Bitcoin's market price. 
+The true source of data for Bitcoin analysis would be from Bitcoin mining pool. Coinbase is one of the main member bitcoin pool from which we can gather mining statistics. Here the data is sourced from a data service called Quandl. Quandl provides the variety of data services in the form of https web services. As we are in the process of identifying the features impacting Bitcoin's price fluctuations, not only the transaction volume impacts, even the popularity and people's trend towards it impact the price of the coins. Hence, data from Google is also gathered. As a currency's price also been altered by its exchange, supply, and demand, Ethereum's price data and transactional data is also acquired from Ethereum's exchange point.
+With all these data sources, we analyze the features impacting the Bitcoin's market price. 
  
  
  \subsection{Feature selection}
@@ -57,17 +57,17 @@ With all these data sources, we analyse the features impacting the Bitcoin's mar
  The last one is the exchange data, as a currencies price is directly proportional to the supply and demand, the supply of the currency can be impacted by the exchange to other currencies or commodity \cite{4:online}. Ethereum is known to show a similar pattern in terms of growth and deviations\cite{Ethereum:online}. Hence, there's price in US dollars and transaction volume is considered one of the features.
 
 \section{Big data in Feature Analysis and Algorithm's execution}
-Feature extraction, transformation, and prediction can be synonymous with a conventional ETL methodology. Though few of the extraction is handled manually and the volume is comparably low, it is assumed that the data volume will be increased by modifying the extraction to real-time systems. When the extraction systems are changed, our code must be able to handle streaming data which can be related to "variety and volume " of the data. The next step is validating the data for anomalies, data miss and cleanse the data of issues which is synonymous with data cleansing. The later one is data processing, which includes data processing with multiple iteration and permutation consuming lot of memory and other resources. These processing needs leads us in adopting Big data technologies in the entire lifecycle of the implementation.
+Feature extraction, transformation, and prediction can be synonymous with a conventional ETL methodology. Though few of the extraction is handled manually and the volume is comparably low, it is assumed that the data volume will be increased by modifying the extraction to real-time systems. When the extraction systems are changed, our code must be able to handle streaming data which can be related to "variety and volume " of the data. The next step is validating the data for anomalies, data miss and cleanse the data of issues which is synonymous with data cleansing. The later one is data processing, which includes data processing with multiple iterations and permutation consuming a lot of memory and other resources. These processing needs lead us in adopting Big data technologies in the entire lifecycle of the implementation.
 
 \subsection{Execution with Apache Spark}
-"Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs". It also provides extensive support to Machine learning libraries(MLlib) and to streaming through Spark Streaming. The in-memory processing is implemented with the help of Resilient distributed dataset (RDDs) \cite{5:online}.
+"Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs". It also provides extensive support to Machine learning libraries(MLlib) and to streaming through Spark Streaming. The in-memory processing is implemented with the help of Resilient distributed dataset (RDD) \cite{5:online}.
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=\columnwidth]{images/Sparkarchic.png}
   \caption{Spark Architecture}
 \end{figure}
 
-Spark's basic abstraction is Resilient Distributed Dataset (RDD), which is a fault tolerant partitioned data encapsulation datatype. RDDs are lazily evaluated, hence a Directed Acyclic Graph is implemented to persist the state of the RDDs at each stage. With RDD, Spark can execute the transformation in parallel with fault tolerance. This implementation widely differentiates from conventional Python implementation which lacks these advanced logic.  
+Spark's basic abstraction is Resilient Distributed Dataset (RDD), which is a fault tolerant partitioned data encapsulation datatype. RDDs are lazily evaluated, hence a Directed Acyclic Graph is implemented to persist the state of the RDDs at each stage. With RDD, Spark can execute the transformation in parallel with fault tolerance. This implementation widely differentiates from conventional Python implementation which lacks this advanced logic.  
 
 Here, we have used Apache's Spark 2.2 to implement all the ETL functionality. Spark is installed is the local system along with Anacondas, so Spark libraries can be consumed inside Python shell. To consume and process Pyspark libraries, sparkcontext is created which initiates the driver program. The spark context is bootstrapped with SQL and Spark session libraries so that Spark RDD and Data frames could be accessed under a single window.
 
@@ -82,7 +82,7 @@ The actual implementation starts with gathering source data with features alread
   \label{Architecture:spark}
 \end{figure}
 
-As shown in figure \ref{Architecture:spark}, the extracted data is loaded to Pyspark RDD and then converted to Pyspark dataframe.Pyspark dataframe is selected to increase the performance of the data processing even though Pyspark dataframe API is not equipped with rich functionalities  similar to Pandas dataframe and Pyspark dataframe can execute the transformations in parallel whereas Pandas cannot. 
+As shown in figure \ref{Architecture:spark}, the extracted data is loaded to Pyspark RDD and then converted to Pyspark dataframe.Pyspark dataframe is selected to increase the performance of the data processing even though Pyspark dataframe API is not equipped with rich functionalities similar to Pandas dataframe and Pyspark dataframe can execute the transformations in parallel whereas Pandas cannot. 
 
 \subsection{Technologies}
 Technologies and tools used in this projects are
@@ -101,7 +101,7 @@ The second set of data is from Etherscan, an open source portal for Ethereum tra
 The third dataset is about the people's trends on Bitcoin's popularity from Google, the granularity of this data is on weekly basis, hence it has to transformed statistically to fit into our model.
 
 The first data set is programmatically downloaded with an API call with a private key authenticating it. {\em wget } is used in downloading the data within Shell script.
-The later ones are downloaded manually from Google and Etherscan sites manually. The volume of the dataset is low, however, the volume increases as the consumption is initiated in real-time.
+The later ones are downloaded manually from Google and Etherscan sites manually. The volume of the dataset is low, however, the volume increases as the consumption are initiated in real-time.
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=\columnwidth]{images/Source1data.png}
@@ -110,7 +110,7 @@ The later ones are downloaded manually from Google and Etherscan sites manually.
 \end{figure}
 
 \subsection{Data Cleansing}
-The data cleansed with multiple Python and feature cleansing libraries in Python and Pyspark. Major efforts of cleansing is needed to standardize the date columns from all the data sources. The date format was in the different format in different sources. To stitch back all the data points, DateTime libraries were used and joined with a single standard format. Another important activity in the cleansing is data miss. For some instance data points, the values are missing resulting in incorrect predictions and correlations. To resolve these missing values, Imputer\cite{imputer:online} functionality is used from feature library of Apache Spark. The imputer is an Imputation estimator for completing missing values, either using the mean or the median of the columns in which the missing values are located. The input to this function is dataframe columns and output are renamed dataframe columns. The processing happens in-memory with the spark.
+The data cleansed with multiple Python and feature cleansing libraries in Python and Pyspark. Major efforts of cleansing are needed to standardize the date columns from all the data sources. The date format was in the different format in different sources. To stitch back all the data points, DateTime libraries were used and joined with a single standard format. Another important activity in the cleansing is data miss. For some instance data points, the values are missing resulting in incorrect predictions and correlations. To resolve these missing values, Imputer\cite{imputer:online} functionality is used from feature library of Apache Spark. The imputer is an Imputation estimator for completing missing values, either using the mean or the median of the columns in which the missing values are located. The input to this function is dataframe columns and output are renamed dataframe columns. The processing happens in-memory with the spark.
 
 \subsection{Data Visualization}
 The visualization is provided in the form of plots. In Python, we have to use Matplot Libraries to plot all the prediction and correlation graphs.
@@ -139,7 +139,7 @@ Spearman's Correlation on selected features are :
   \label{1}
 \end{figure}
 
-The Figure\ref{1} describes the correlation between Bitcoin transaction count and its value. Or in other perspective, the transaction count is consistent and due to the increase in price people started buying Bitcoins leading to volatility.
+The Figure\ref{1} describes the correlation between Bitcoin transaction count and its value. Or in other perspectives, the transaction count is consistent and due to the increase in price people started buying Bitcoins leading to volatility.
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=\columnwidth]{images/High.png}
@@ -184,7 +184,7 @@ As described in figure \ref{5}, the correlation plot provides the pattern betwee
 
 Figure \ref{6} and \ref{7} describes the correlation of Ethereum's price and its transaction volumes with Bitcoin's price in which the transaction pattern of Ethereum is more similar to Bitcoin's pattern is evident. 
 
-As far as processing is concerned, all the RDDs are cached before feeding into Spearman's correlation function, the reason being, when the RDDs are transformed multiple times, it has to calculate data lineage everytime it is computed and lineage is the basic quality of resilience in Apache Spark. If the RDDs are cached and persisted inmemory, the iteration and other transformations happen inmemory avoiding costly I/O operations, this feature cannot be easily implemented when executed in conventional python libraries.
+As far as processing is concerned, all the RDDs are cached before feeding into Spearman's correlation function, the reason being, when the RDDs are transformed multiple times, it has to calculate data lineage everytime it is computed and lineage is the basic quality of resilience in Apache Spark. If the RDDs are cached and persisted in-memory, the iteration and other transformations happen in memory avoiding costly I/O operations, this feature cannot be easily implemented when executed in conventional python libraries.
 
 
 \section{Decision tree regression}
@@ -226,7 +226,7 @@ Random forest requires parameters to tune the model for the highest accuracy. Be
 With all parameters set and by tuning the model, Avg.closeness index of the algorithm is closer to 0.95. After deriving the model, the closeness/correctness of the predicted results was also analyzed and it is described in the plot given below.
 
 \subsection{Gradient Boosted tree}
-In the Gradient Boosted algorithm, the similar training and test data are used similarly to the Random Forest algorithm. Upon execution for three interations, it is clearly evident with the closeness index that the data is little bit overfitted with the closeness index of 0.96, slightly greater than Random forest.
+In the Gradient Boosted algorithm, the similar training and test data are used similarly to the Random Forest algorithm. Upon execution of three iterations, it is clearly evident with the closeness index that the data is little bit overfitted with the closeness index of 0.96, slightly greater than Random forest.
 The parameters used in these functions are 
 \begin{itemize}
 \item data  Training dataset: RDD of LabeledPoint. Labels are real numbers.
@@ -255,27 +255,26 @@ By altering the parameters, the performance of the model can be optimized.
 \end{figure}
 
 
-From the observation of scatter plots of regression model Random foresr \ref{scpl:ran} and GBT \ref{scpl:ran}, it is evident that GBT's single tree iterative model has predicted the values with over fitting. Some predicted values are consistent for some particular time scope and changes happening in steps. The prediction distribution looks like single line and not wide spread. Whereas, in the Random forest, the predicted values are wide spread and closely aligned. Also the other correlation graphs explain that Bitcoin transaction count don't impact the Bitcoin's values. even the exchange data doesn't impact much though the correlation looks close, there is a possibility that owners are not using the Bitcoin for any day to day transactions instead they are using as an asset like Gold, and by retaining it, the demand for the Bitcoin coin further increases. Also, the new-coins can only be generated through mining and the growth is controlled, coins in circulation keeps reducing, increasing its cost.
-These analysis clearly proves that Bitcoin bought are saved in the wallets are not used in the regular transaction much. Most of the Bitcoin's are retained to earn the profit over its demand and its growth.
+From the observation of scatter plots of regression model Random forest \ref{scpl:ran} and GBT \ref{scpl:ran}, it is evident that GBT's single tree iterative model has predicted the values with overfitting. Some predicted values are consistent with some particular time scope and changes happening in steps. The prediction distribution looks like a single line and not widespread. Whereas, in the Random forest, the predicted values are widespread and closely aligned. Also, the other correlation graphs explain that Bitcoin transaction count doesn't impact the Bitcoin's values. even the exchange data doesn't impact much though the correlation looks close, there is a possibility that owners are not using the Bitcoin for any day to day transactions instead they are using as an asset like Gold, and by retaining it, the demand for the Bitcoin coin further increases. Also, the new-coins can only be generated through mining and the growth is controlled, coins in circulation keep reducing, increasing its cost.
+This analysis clearly proves that Bitcoin bought are saved in the wallets are not used in the regular transaction much. Most of the Bitcoin's are retained to earn the profit over its demand and its growth.
 
 
 \section{Challenges faced}
 Most of the challenges are with the data and casting to the required data types as the correlation and regression functions need data either in Float or double data types. And handling all these constraints along with Big data specifics in mind adds up to the challenge, thanks to Apache Spark which handles the data lineage and persistence through RDDs.
 
 \section{Project structure}
-Three folders are created, the first one is for scripts which retains the actual code to be executed and two korn shell scripts to install dependencies and to download the files. The second one is the data folder which retains the data required for the model and correlation algorithm. And the extract folder is to persist the plot figures extracted out of the python script. And git is used to control the versioning of the project. 
+Three folders are created, the first one is for scripts which retain the actual code to be executed and two Korn shell scripts to install dependencies and to download the files. The second one is the data folder which retains the data required for the model and correlation algorithm. And the extracted folder is to persist the plot figures extracted out of the python script. And git is used to controlling the versioning of the project. 
 
 \section{Improvement Opportunities}
-There are lot of improvement opportunities to be implemented in the project. On of them includes fetching the data in near realtime directly from the Mining-pool instead of a third party data service, second one would be increasing the granularity of data which would increase the performance and using Spark make more sense with that level of granularity and volume. The other improvement opportunities include gathering more features like illegal market transaction data, mining exchange data, wallet exchange data, world's inconsistency data which will increase correlation factors and result in accurate prediction of models. Other visualization  opportunity includes real time presentation capabilities with Big data at the back end. Matplot API have minimal options for real time reporting which can be upgraded.
+There are a lot of improvement opportunities to be implemented in the project. One of them includes fetching the data in near real-time directly from the Mining-pool instead of a third party data service, the second one would be increasing the granularity of data which would increase the performance and  Spark make more sense with that level of granularity and volume. The other improvement opportunities include gathering more features like illegal market transaction data, mining exchange data, wallet exchange data, world's inconsistency data which will increase correlation factors and result in the accurate prediction of models. Other visualization opportunity includes real-time presentation capabilities with Big data at the back end. Matplot API has minimal options for real-time reporting which can be upgraded.
 
 \section{Conclusion}
 
-With all prowess of Big data and its technologies, Block chain technologies are not only evolving, it also equip humans with the opportunity to make the world more transparent, ethical and a viable place to live. Even these technologies helps us to conserve the earth by reducing resource consumption like paper, audit trials and power. As the technology has evolved so far, it is expected to understand its growth story in terms of its microscopic level to push it to the next level of improvement. Such microscopic level of qualities were missed in legacy methods and Big data comes to the rescue in identifying those qualities and nurturing them.
+With all prowess of Big data and its technologies, Blockchain technologies are not only evolving, it also equips humans with the opportunity to make the world more transparent, ethical and a viable place to live. Even these technologies help us to conserve the earth by reducing resource consumption like paper, audit trials and power. As the technology has evolved so far, it is expected to understand its growth story in terms of its microscopic level to push it to the next level of improvement. Such microscopic level of qualities was missed in legacy methods and Big data comes to the rescue in identifying those qualities and nurturing them.
 
 
 \begin{acks}
-  The authors would like to thank Dr. Gregor von Laszewski for his
-  support and suggestions to write this paper.
+  The authors would like to thank Dr. Gregor von Laszewski for his support and suggestions to write this paper.
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
