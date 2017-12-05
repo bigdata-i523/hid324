@@ -4,7 +4,7 @@ from pyspark.sql import Row
 from datetime import datetime
 from pyspark.sql import SparkSession
 
-conf = SparkConf().setAppName("RandomForest").setMaster("local[4]")
+conf = SparkConf().setAppName("RandomForestandGBT").setMaster("local[4]")
 sc = SparkContext(conf=conf)
 
 spark = SparkSession(sc)
@@ -213,6 +213,7 @@ temp.take(5)
 model = RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo={},numTrees=8, featureSubsetStrategy="auto",impurity='variance', maxDepth=30, maxBins=32)
 predictions = model.predict(testData.map(lambda x: x.features))
 labelsAndPredictions = testData.map(lambda lp: lp.label).zip(predictions)
+labelsAndPredictions.cache()
 
 
 ###############accuracy
@@ -225,6 +226,18 @@ print('Test Mean Squared Error = ' + str(testMSE))
 print('Learned regression forest model:')
 #print(model.toDebugString())
 
+########## Prediction scatter plot
+predict=labelsAndPredictions.sortByKey().map(lambda a:a[1]).collect()
+label=labelsAndPredictions.sortByKey().map(lambda a:a[0]).collect()
+x=range(int(labelsAndPredictions.count()))
+
+fig = plt.figure()
+ax1 = fig.add_subplot(111)
+ax1.scatter(x, label, s=10, c='b', marker="|", label='Test price')
+ax1.scatter(x,predict, s=10, c='r', marker="|", label='Predicted price')
+plt.legend(loc='upper left');
+plt.savefig("extract/RandomForest-scatterplot.png")
+plt.clf()
 
 #######setup GBT
 print "Model initiated - GBT "
@@ -234,8 +247,22 @@ from pyspark.mllib.tree import GradientBoostedTrees, GradientBoostedTreesModel
 model1 = GradientBoostedTrees.trainRegressor(trainingData,categoricalFeaturesInfo={}, numIterations=3)
 predictions1 = model1.predict(testData.map(lambda x: x.features))
 labelsAndPredictions1 = testData.map(lambda lp: lp.label).zip(predictions1)
+labelsAndPredictions1.cache()
 testMSE1 = labelsAndPredictions1.map(lambda lp: (lp[0] - lp[1]) * (lp[0] - lp[1])).sum() /float(testData.count())
 print('Test Mean Squared Error = ' + str(testMSE1))
 
 acc1 = labelsAndPredictions1.map(lambda x: ((x[0]/x[1])*100)).reduce(add)
 print ("Closeness Index : %.2f%%"  %(acc1/labelsAndPredictions1.count()))
+
+########## Prediction scatter plot
+predict1=labelsAndPredictions1.sortByKey().map(lambda a:a[1]).collect()
+label1=labelsAndPredictions1.sortByKey().map(lambda a:a[0]).collect()
+x=range(int(labelsAndPredictions.count()))
+
+fig = plt.figure()
+ax2 = fig.add_subplot(111)
+ax2.scatter(x, label1, s=10, c='b', marker="|", label='Test price')
+ax2.scatter(x,predict1, s=10, c='r', marker="|", label='Predicted price')
+plt.legend(loc='upper left');
+plt.savefig("extract/GBT-scatterplot.png")
+plt.clf()
