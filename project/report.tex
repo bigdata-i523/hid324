@@ -44,8 +44,7 @@ In technical terms, Bitcoin's is a shared ledger or a database running by a set 
  
  
  \subsection{Data Source}
- As Bitcoin is a decentralized and a transparent system, all the source of data can be gathered from the peer-to-peer networks. This peer-to-peer network is called as Bitcoin-mining pool \cite{1:online}
- The rate of block creation is adjusted every 2016 blocks to aim for a constant two week adjustment period (equivalent to 6 per hour.) The number of Bitcoins generated per block is set to decrease geometrically, with a 50 reduction every 210,000 blocks, or approximately four years. The result is that the number of bitcoins in existence is not expected to exceed 21 million \cite{2:online}.
+ As Bitcoin is a decentralized and a transparent system, all the source of data can be gathered from the peer-to-peer networks. This peer-to-peer network is called as Bitcoin-mining pool \cite{1:online}.The rate of block creation is adjusted every 2016 blocks to aim for a constant two week adjustment period (equivalent to 6 per hour.) The number of Bitcoins generated per block is set to decrease geometrically, with a 50 reduction every 210,000 blocks, or approximately four years. The result is that the number of bitcoins in existence is not expected to exceed 21 million \cite{2:online}.
 The true source of data for Bitcoin analysis would be from Bitcoin mining pool. Coinbase is one of the main member bitcoin pool from which we can gather mining statistics. Here the data is sourced from a data service called Quandl. Quandl provides the variety of data services in the form of https web services. As we are in the process of identifying the features impacting Bitcoin's price fluctuations, not only the transaction volume impacts, even the popularity and people's trend towards it impact the price of the coins. Hence, data from Google is also gathered. As a currency's price also been altered by its exchange, supply, and demand, Ethereum's price data and transactional data is also acquired from Ethereum's exchange point.
 With all these data sources, we analyze the features impacting the Bitcoin's market price. 
  
@@ -60,7 +59,7 @@ With all these data sources, we analyze the features impacting the Bitcoin's mar
 Feature extraction, transformation, and prediction can be synonymous with a conventional ETL methodology. Though few of the extraction is handled manually and the volume is comparably low, it is assumed that the data volume will be increased by modifying the extraction to real-time systems. When the extraction systems are changed, our code must be able to handle streaming data which can be related to "variety and volume " of the data. The next step is validating the data for anomalies, data miss and cleanse the data of issues which is synonymous with data cleansing. The later one is data processing, which includes data processing with multiple iterations and permutation consuming a lot of memory and other resources. These processing needs lead us in adopting Big data technologies in the entire lifecycle of the implementation.
 
 \subsection{Execution with Apache Spark}
-"Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs". It also provides extensive support to Machine learning libraries(MLlib) and to streaming through Spark Streaming. The in-memory processing is implemented with the help of Resilient distributed dataset (RDD) \cite{5:online}.
+''Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs''. It also provides extensive support to Machine learning libraries(MLlib) and to streaming through Spark Streaming. The in-memory processing is implemented with the help of Resilient distributed dataset (RDD) \cite{5:online}.
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=\columnwidth]{images/Sparkarchic.png}
@@ -226,7 +225,7 @@ Random forest requires parameters to tune the model for the highest accuracy. Be
 With all parameters set and by tuning the model, Avg.closeness index of the algorithm is closer to 0.95. After deriving the model, the closeness/correctness of the predicted results was also analyzed and it is described in the plot given below.
 
 \subsection{Gradient Boosted tree}
-In the Gradient Boosted algorithm, the similar training and test data are used similarly to the Random Forest algorithm. Upon execution of three iterations, it is clearly evident with the closeness index that the data is little bit overfitted with the closeness index of 0.96, slightly greater than Random forest.
+In the Gradient Boosted algorithm, the similar training and test data are used similarly to the Random Forest algorithm. Upon execution of three iterations, it is clearly evident with the closeness index that the data is little bit over-fitted with the closeness index of 0.96, slightly greater than Random forest.
 The parameters used in these functions are 
 \begin{itemize}
 \item data  Training dataset: RDD of LabeledPoint. Labels are real numbers.
@@ -235,7 +234,7 @@ The parameters used in these functions are
 \item numIterations  Number of iterations of boosting
 \item learningRate  Learning rate for shrinking the contribution of each estimator
 \item maxDepth  Maximum depth of tree 
-\item maxBins  Maximum number of bins used for splitting features. DecisionTrees requires maxBins greater than max categories
+\item maxBins  Maximum number of bins used for splitting features.
 \end{itemize}
 
 By altering the parameters, the performance of the model can be optimized.
@@ -280,6 +279,6 @@ With all prowess of Big data and its technologies, Blockchain technologies are n
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
 
-\input{issues}
+
 
 \end{document}
