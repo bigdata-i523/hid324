@@ -1,4 +1,4 @@
-This document describes the execution steps of the project code
+This document describes the execution steps of the project
 
 
 # Configuration of jobs 
