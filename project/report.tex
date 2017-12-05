@@ -63,7 +63,7 @@ Feature extraction, transformation, and prediction can be synonymous with a conv
 "Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs". It also provides extensive support to Machine learning libraries(MLlib) and to streaming through Spark Streaming. The in-memory processing is implemented with the help of Resilient distributed dataset (RDDs) \cite{5:online}.
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/Sparkarchic.png}
+  \centering\includegraphics[width=\columnwidth]{images/Sparkarchic.png}
   \caption{Spark Architecture}
 \end{figure}
 
@@ -77,7 +77,7 @@ As the abstract describes the necessity of the features impacting bitcoin's pric
 The actual implementation starts with gathering source data with features already discussed the prior topic, upon data extraction, it is cleansed with missing data and standardized to mix and match data from multiple sources. All the data manipulation is done either in Pyspark dataframe or pyspark RDDs. The visualization is provided by Matplotlib.
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/Projectflow.png}
+  \centering\includegraphics[width=\columnwidth]{images/Projectflow.png}
   \caption{Project Architecture on Spark}
   \label{Architecture:spark}
 \end{figure}
@@ -104,7 +104,7 @@ The first data set is programmatically downloaded with an API call with a privat
 The later ones are downloaded manually from Google and Etherscan sites manually. The volume of the dataset is low, however, the volume increases as the consumption is initiated in real-time.
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/Source1data.png}
+  \centering\includegraphics[width=\columnwidth]{images/Source1data.png}
   \caption{Bitcoin mining statistics data}
   \label{}
 \end{figure}
@@ -134,7 +134,7 @@ Spearman's Correlation on selected features are :
 \end{itemize}
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/BTC-prcvsBTC-trans.png}
+  \centering\includegraphics[width=\columnwidth]{images/BTC-prcvsBTC-trans.png}
   \caption{BTC Transaction and USD value - 0.348540857386 }
   \label{1}
 \end{figure}
@@ -142,7 +142,7 @@ Spearman's Correlation on selected features are :
 The Figure\ref{1} describes the correlation between Bitcoin transaction count and its value. Or in other perspective, the transaction count is consistent and due to the increase in price people started buying Bitcoins leading to volatility.
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/High.png}
+  \centering\includegraphics[width=\columnwidth]{images/High.png}
   \caption{Bitcoin Highest exchange value and Closing value - 0.998581861669  }
   \label{2}
 \end{figure}
@@ -150,20 +150,20 @@ The Figure\ref{1} describes the correlation between Bitcoin transaction count an
 The Figures \ref{2},\ref{3} and \ref{4} describes the correlation between open, low and high prices of Bitcoin on the recorded date. This is obvious that the closing price is highly correlated with them.
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/Open.png}
+  \centering\includegraphics[width=\columnwidth]{images/Open.png}
   \caption{Bitcoin Lowest exchange value and Closing value - 0.995190604708  }
   \label{3}
 \end{figure}
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/low.png}
+  \centering\includegraphics[width=\columnwidth]{images/low.png}
   \caption{Bitcoin Opening exchange value and Closing value - 0.997943642437}
   \label{4}
 \end{figure}
 
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/googletrend.png}
+  \centering\includegraphics[width=\columnwidth]{images/googletrend.png}
   \caption{Bitcoin USD value and Google search trend - 0.260343238604}
   \label{5}
 \end{figure}
@@ -171,13 +171,13 @@ The Figures \ref{2},\ref{3} and \ref{4} describes the correlation between open, 
 As described in figure \ref{5}, the correlation plot provides the pattern between the search trends and the hike in price, which is clearly evident.
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/ethvalue.png}
+  \centering\includegraphics[width=\columnwidth]{images/ethvalue.png}
   \caption{ETH price and BTC price - 0.68683414787 }
   \label{6}
 \end{figure}
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/ethtrancount.png}
+  \centering\includegraphics[width=\columnwidth]{images/ethtrancount.png}
   \caption{ETH Transaction volume and BTC transaction volume - 0.720031468617 }
   \label{7}
 \end{figure}
@@ -191,7 +191,7 @@ As far as processing is concerned, all the RDDs are cached before feeding into S
 With the availability of features, we can take the processing to the next level of predicting Bitcoin's price. Here, supervised learning model is used to predict the price of Bitcoin.
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/Decisiontree.png}
+  \centering\includegraphics[width=\columnwidth]{images/Decisiontree.png}
   \caption{Sample Decision tree}
   \label{fig:8decisiongree}
 \end{figure}
@@ -243,13 +243,13 @@ By altering the parameters, the performance of the model can be optimized.
 \section{Results}
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/RandomForestscatterplot.png}
+  \centering\includegraphics[width=\columnwidth]{images/RandomForestscatterplot.png}
   \caption{Randomforest Scatterplot}
   \label{scpl:ran}
 \end{figure}
 
 \begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{PROJECT/images/GBTscatterplot.png}
+  \centering\includegraphics[width=\columnwidth]{images/GBTscatterplot.png}
   \caption{GBT Scatterplot}
   \label{scpl:gbt}
 \end{figure}
