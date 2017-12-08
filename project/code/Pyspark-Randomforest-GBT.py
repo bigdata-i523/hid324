@@ -221,9 +221,15 @@ from operator import add
 acc = labelsAndPredictions.map(lambda x: ((x[0]/x[1])*100)).reduce(add)
 print ("Closeness Index : %.2f%%"  %(acc/labelsAndPredictions.count()))
 
-testMSE = labelsAndPredictions.map(lambda lp: (lp[0] - lp[1]) * (lp[0] - lp[1])).sum() /float(testData.count())
-print('Test Mean Squared Error = ' + str(testMSE))
-print('Learned regression forest model:')
+from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD
+from pyspark.mllib.evaluation import RegressionMetrics
+from pyspark.mllib.linalg import DenseVector
+
+metrics = RegressionMetrics(labelsAndPredictions)
+print("MSE = %s" % metrics.meanSquaredError)
+print("RMSE = %s" % metrics.rootMeanSquaredError)
+print("R-squared = %s" % metrics.r2)
+print("MAE = %s" % metrics.meanAbsoluteError)
 #print(model.toDebugString())
 
 ########## Prediction scatter plot
@@ -248,11 +254,15 @@ model1 = GradientBoostedTrees.trainRegressor(trainingData,categoricalFeaturesInf
 predictions1 = model1.predict(testData.map(lambda x: x.features))
 labelsAndPredictions1 = testData.map(lambda lp: lp.label).zip(predictions1)
 labelsAndPredictions1.cache()
-testMSE1 = labelsAndPredictions1.map(lambda lp: (lp[0] - lp[1]) * (lp[0] - lp[1])).sum() /float(testData.count())
-print('Test Mean Squared Error = ' + str(testMSE1))
 
 acc1 = labelsAndPredictions1.map(lambda x: ((x[0]/x[1])*100)).reduce(add)
 print ("Closeness Index : %.2f%%"  %(acc1/labelsAndPredictions1.count()))
+
+metrics = RegressionMetrics(labelsAndPredictions1)
+print("MSE = %s" % metrics.meanSquaredError)
+print("RMSE = %s" % metrics.rootMeanSquaredError)
+print("R-squared = %s" % metrics.r2)
+print("MAE = %s" % metrics.meanAbsoluteError)
 
 ########## Prediction scatter plot
 predict1=labelsAndPredictions1.sortByKey().map(lambda a:a[1]).collect()
