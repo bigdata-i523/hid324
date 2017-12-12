@@ -1,14 +1,22 @@
+
+# coding: utf-8
+
+# In[1]:
+
 from pyspark import SparkContext, SparkConf
 from pyspark.sql.types import *
 from pyspark.sql import Row
 from datetime import datetime
 from pyspark.sql import SparkSession
 
-conf = SparkConf().setAppName("RandomForestandGBT").setMaster("local[4]")
+conf = SparkConf().setAppName("RandomForest").setMaster("local[4]")
 sc = SparkContext(conf=conf)
 
 spark = SparkSession(sc)
 print "Spark context initiated.."
+
+
+# In[2]:
 
 import pyspark.mllib
 import pyspark.mllib.regression
@@ -27,8 +35,8 @@ cwd = os.getcwd()
 print "Executing in Direectory : " + cwd
 
 
-###load base data 
-#data=sc.textFile('/Users/ashokkuppuraj/Documents/Indiana Univ/fall 2017/BIG DATA/Project/scripts/data/Bitcoin_USD_History.csv')
+# In[3]:
+
 data=sc.textFile("data/Bitcoin_USD_History.csv")
 rdd = data.map(lambda line: line.split(","))
 header = rdd.first()
@@ -38,7 +46,8 @@ base_df = rdd.map(lambda line: Row(aaclose=line[4],waitage=line[7],open=line[1],
 
 print "Base File 1/3 loaded"
 
-#load Google data
+
+# In[4]:
 
 google_data=sc.textFile('data/Google-Intererst-Bitcoin.csv')
 google_rdd = google_data.map(lambda line: line.split(","))
@@ -50,7 +59,9 @@ google_df=google_rdd.map(lambda line: Row(dt_sp=line[0],cnt=float(line[1]))).toD
 
 print "Base File 2/3 loaded"
 
-#Load ETH DATA
+
+# In[5]:
+
 data1=sc.textFile('data/export-ETHTx.csv')
 data2=sc.textFile('data/export-EtherPrice.csv')
 rdd1 = data1.map(lambda line: line.split(","))
@@ -64,13 +75,17 @@ rdd1.take(10)
 
 print "Base File 3/3 loaded"
 
+
+# In[6]:
+
 ETH_TXN_df = rdd1.map(lambda line: Row(dt=line[0],utime=line[1],txns=float(line[2]))).toDF()
 ETH_PRICE_df = rdd2.map(lambda line: Row(dt=line[0],utime=line[1],price=float(line[2]))).toDF()
 
 ETH_df=ETH_TXN_df.join(ETH_PRICE_df,ETH_TXN_df.dt==ETH_PRICE_df.dt)
 ETH_DF=ETH_df.rdd.map(lambda line:Row(dt_e=datetime.strptime(line[0],"%m/%d/%Y").strftime("%Y-%m-%d"),txns=line[1],price=line[4])).toDF()
 
-###Join base data with Google data 
+
+# In[7]:
 
 BIT_df=base_df.join(google_df,base_df.dt==google_df.dt_sp,"left_outer")
 
@@ -80,7 +95,9 @@ df_all_data=BIT_df.join(ETH_DF, BIT_df.dt==ETH_DF.dt_e,"left_outer")
 
 print "Base File merge completed with record count : " + str(df_all_data.count())
 
-###Imputing
+
+# In[8]:
+
 from pyspark.ml.feature import Imputer
 imputer = Imputer(inputCols=["cnt", "price","txns"], outputCols=["cnt", "price","txns"])
 model = imputer.fit(df_all_data)
@@ -88,12 +105,17 @@ model.surrogateDF.show()
 corrected_df=model.transform(df_all_data)
 corrected_df.cache()
 
+
+# In[9]:
+
 print "Feature correction completed - Imputer finished"
 
 print "Correlation analysis started "
 
 
-####Correlation calculation
+
+# In[10]:
+
 print "spearman's Correlation on selected features ::"
 from pyspark.mllib.stat import Statistics
 aaclose_rdd=corrected_df.rdd.map(lambda l:l['aaclose']).cache()
@@ -117,6 +139,8 @@ print "btc_price<Label>:" + str(Statistics.corr(aaclose_rdd,aaclose_rdd,"spearma
 print "Correlation analysis Completed "
 
 
+# In[11]:
+
 ####Correlation plots
 print "Correlation plot started "
 
@@ -137,6 +161,9 @@ plt.clf()
 
 print "Correlation plot [-     ] "
 
+
+# In[12]:
+
 high=[float(i.high) for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(high, label="Bitcoin transactions", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
@@ -148,6 +175,9 @@ plt.clf()
 
 print "Correlation plot [--    ] "
 
+
+# In[13]:
+
 low=[float(i.low) for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(low, label="BTC Low", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
@@ -158,6 +188,10 @@ plt.savefig("extract/Correlation-low.png")
 plt.clf()
 
 print "Correlation plot [---   ]"
+
+
+# In[14]:
+
 open=[float(i.open) for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(open, label="BTC open", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
@@ -169,6 +203,9 @@ plt.clf()
 
 print "Correlation plot [----  ] "
 
+
+# In[15]:
+
 cnt=[float(i.cnt)*60 for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(cnt, label="Google Trend", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
@@ -179,6 +216,10 @@ plt.savefig("extract/Correlation-Googletrend.png")
 plt.clf()
 
 print "Correlation plot [----- ]"
+
+
+# In[16]:
+
 price=[float(i.price)*10 for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(price, label="ETH USD value", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
@@ -189,6 +230,10 @@ plt.savefig("extract/Correlation-ETH.png")
 plt.clf()
 
 print "Correlation plot [------] "
+
+
+# In[17]:
+
 txns=[float(i.txns)/20 for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(txns, label="ETH treansaction count", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
@@ -198,11 +243,15 @@ plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.savefig("extract/Correlation-ETHtxns.png")
 plt.clf()
 
+
+# In[18]:
+
 print "All plots are exported to "+str(cwd)+'/'+'extract'+" folder"
 print "Model initiated - Random Forest "
 
 
-####################set up model 
+# In[19]:
+
 
 df=corrected_df.select([c for c in corrected_df.columns if c not in {'dt','dt_e','dt_sp','cnt','price','txns','high','low','open'}])
 temp = df.rdd.map(lambda line:LabeledPoint(line[0],[line[1:]]))
@@ -230,9 +279,11 @@ print("MSE = %s" % metrics.meanSquaredError)
 print("RMSE = %s" % metrics.rootMeanSquaredError)
 print("R-squared = %s" % metrics.r2)
 print("MAE = %s" % metrics.meanAbsoluteError)
-#print(model.toDebugString())
 
-########## Prediction scatter plot
+
+
+# In[20]:
+
 predict=labelsAndPredictions.sortByKey().map(lambda a:a[1]).collect()
 label=labelsAndPredictions.sortByKey().map(lambda a:a[0]).collect()
 x=range(int(labelsAndPredictions.count()))
@@ -242,10 +293,15 @@ ax1 = fig.add_subplot(111)
 ax1.scatter(x, label, s=10, c='b', marker="|", label='Test price')
 ax1.scatter(x,predict, s=10, c='r', marker="|", label='Predicted price')
 plt.legend(loc='upper left');
-plt.savefig("extract/RandomForest-scatterplot.png")
-plt.clf()
 
-#######setup GBT
+
+# In[21]:
+
+plt.show()
+
+
+# In[22]:
+
 print "Model initiated - GBT "
 
 from pyspark.mllib.tree import GradientBoostedTrees, GradientBoostedTreesModel
@@ -254,9 +310,12 @@ model1 = GradientBoostedTrees.trainRegressor(trainingData,categoricalFeaturesInf
 predictions1 = model1.predict(testData.map(lambda x: x.features))
 labelsAndPredictions1 = testData.map(lambda lp: lp.label).zip(predictions1)
 labelsAndPredictions1.cache()
-
 acc1 = labelsAndPredictions1.map(lambda x: ((x[0]/x[1])*100)).reduce(add)
 print ("Closeness Index : %.2f%%"  %(acc1/labelsAndPredictions1.count()))
+
+from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD
+from pyspark.mllib.evaluation import RegressionMetrics
+from pyspark.mllib.linalg import DenseVector
 
 metrics = RegressionMetrics(labelsAndPredictions1)
 print("MSE = %s" % metrics.meanSquaredError)
@@ -264,7 +323,9 @@ print("RMSE = %s" % metrics.rootMeanSquaredError)
 print("R-squared = %s" % metrics.r2)
 print("MAE = %s" % metrics.meanAbsoluteError)
 
-########## Prediction scatter plot
+
+# In[23]:
+
 predict1=labelsAndPredictions1.sortByKey().map(lambda a:a[1]).collect()
 label1=labelsAndPredictions1.sortByKey().map(lambda a:a[0]).collect()
 x=range(int(labelsAndPredictions.count()))
@@ -274,5 +335,14 @@ ax2 = fig.add_subplot(111)
 ax2.scatter(x, label1, s=10, c='b', marker="|", label='Test price')
 ax2.scatter(x,predict1, s=10, c='r', marker="|", label='Predicted price')
 plt.legend(loc='upper left');
-plt.savefig("extract/GBT-scatterplot.png")
-plt.clf()
+
+
+# In[24]:
+
+plt.show()
+
+
+# In[ ]:
+
+
+
