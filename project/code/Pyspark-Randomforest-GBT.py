@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[46]:
 
 from pyspark import SparkContext, SparkConf
 from pyspark.sql.types import *
@@ -16,7 +16,7 @@ spark = SparkSession(sc)
 print "Spark context initiated.."
 
 
-# In[2]:
+# In[99]:
 
 import pyspark.mllib
 import pyspark.mllib.regression
@@ -35,7 +35,7 @@ cwd = os.getcwd()
 print "Executing in Direectory : " + cwd
 
 
-# In[3]:
+# In[100]:
 
 data=sc.textFile("data/Bitcoin_USD_History.csv")
 rdd = data.map(lambda line: line.split(","))
@@ -47,7 +47,7 @@ base_df = rdd.map(lambda line: Row(aaclose=line[4],waitage=line[7],open=line[1],
 print "Base File 1/3 loaded"
 
 
-# In[4]:
+# In[101]:
 
 google_data=sc.textFile('data/Google-Intererst-Bitcoin.csv')
 google_rdd = google_data.map(lambda line: line.split(","))
@@ -60,7 +60,7 @@ google_df=google_rdd.map(lambda line: Row(dt_sp=line[0],cnt=float(line[1]))).toD
 print "Base File 2/3 loaded"
 
 
-# In[5]:
+# In[102]:
 
 data1=sc.textFile('data/export-ETHTx.csv')
 data2=sc.textFile('data/export-EtherPrice.csv')
@@ -76,7 +76,7 @@ rdd1.take(10)
 print "Base File 3/3 loaded"
 
 
-# In[6]:
+# In[103]:
 
 ETH_TXN_df = rdd1.map(lambda line: Row(dt=line[0],utime=line[1],txns=float(line[2]))).toDF()
 ETH_PRICE_df = rdd2.map(lambda line: Row(dt=line[0],utime=line[1],price=float(line[2]))).toDF()
@@ -85,7 +85,7 @@ ETH_df=ETH_TXN_df.join(ETH_PRICE_df,ETH_TXN_df.dt==ETH_PRICE_df.dt)
 ETH_DF=ETH_df.rdd.map(lambda line:Row(dt_e=datetime.strptime(line[0],"%m/%d/%Y").strftime("%Y-%m-%d"),txns=line[1],price=line[4])).toDF()
 
 
-# In[7]:
+# In[104]:
 
 BIT_df=base_df.join(google_df,base_df.dt==google_df.dt_sp,"left_outer")
 
@@ -96,7 +96,7 @@ df_all_data=BIT_df.join(ETH_DF, BIT_df.dt==ETH_DF.dt_e,"left_outer")
 print "Base File merge completed with record count : " + str(df_all_data.count())
 
 
-# In[8]:
+# In[105]:
 
 from pyspark.ml.feature import Imputer
 imputer = Imputer(inputCols=["cnt", "price","txns"], outputCols=["cnt", "price","txns"])
@@ -106,7 +106,7 @@ corrected_df=model.transform(df_all_data)
 corrected_df.cache()
 
 
-# In[9]:
+# In[106]:
 
 print "Feature correction completed - Imputer finished"
 
@@ -114,7 +114,7 @@ print "Correlation analysis started "
 
 
 
-# In[10]:
+# In[122]:
 
 print "spearman's Correlation on selected features ::"
 from pyspark.mllib.stat import Statistics
@@ -139,7 +139,7 @@ print "btc_price<Label>:" + str(Statistics.corr(aaclose_rdd,aaclose_rdd,"spearma
 print "Correlation analysis Completed "
 
 
-# In[11]:
+# In[123]:
 
 ####Correlation plots
 print "Correlation plot started "
@@ -153,104 +153,125 @@ aaclose=[float(i.aaclose) for i in corrected_df.sort(asc("dt")).collect()]
 btc_vol=[float(i.btc_vol)/10 for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(btc_vol, label="Bitcoin transactions", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
-plt.ylabel("count")
+plt.ylabel("Bitcoin transactions and USD value")
 plt.xlabel("Date progression")
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.savefig("extract/Correlation-btc_vol.png")
+plt.legend(loc='upper right');
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+plt.savefig("extract/Correlation-btc_vol.png",dpi=300)
+plt.show()
 plt.clf()
 
 print "Correlation plot [-     ] "
 
 
-# In[12]:
+# In[124]:
 
 high=[float(i.high) for i in corrected_df.sort(asc("dt")).collect()]
-plt.plot(high, label="Bitcoin transactions", linestyle='--')
+plt.plot(high, label="Bitcoin High", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
-plt.ylabel("count")
+plt.ylabel("Bitcoin High and USD value")
 plt.xlabel("Date progression")
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.savefig("extract/Correlation-high.png")
+plt.legend(loc='upper right');
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+plt.savefig("extract/Correlation-high.png",dpi=300)
+plt.show()
 plt.clf()
 
 print "Correlation plot [--    ] "
 
 
-# In[13]:
+# In[125]:
 
 low=[float(i.low) for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(low, label="BTC Low", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
-plt.ylabel("count")
+plt.ylabel("Bitcoin Low and USD value")
 plt.xlabel("Date progression")
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.savefig("extract/Correlation-low.png")
+plt.legend(loc='upper right');
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+plt.savefig("extract/Correlation-low.png",dpi=300)
+plt.show()
 plt.clf()
 
 print "Correlation plot [---   ]"
 
 
-# In[14]:
+# In[126]:
 
 open=[float(i.open) for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(open, label="BTC open", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
-plt.ylabel("count")
+plt.ylabel("Bitcoin Open value and USD value")
 plt.xlabel("Date progression")
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.savefig("extract/Correlation-open.png")
+plt.legend(loc='upper right');
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+plt.savefig("extract/Correlation-open.png",dpi=300)
+plt.show()
 plt.clf()
 
 print "Correlation plot [----  ] "
 
 
-# In[15]:
+# In[127]:
 
 cnt=[float(i.cnt)*60 for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(cnt, label="Google Trend", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
-plt.ylabel("count")
+plt.ylabel("Google trend and Bitcoin USD value")
 plt.xlabel("Date progression")
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.savefig("extract/Correlation-Googletrend.png")
+plt.legend(loc='upper right');
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+plt.savefig("extract/Correlation-Googletrend.png",dpi=300)
+plt.show()
 plt.clf()
 
 print "Correlation plot [----- ]"
 
 
-# In[16]:
+# In[128]:
 
 price=[float(i.price)*10 for i in corrected_df.sort(asc("dt")).collect()]
 plt.plot(price, label="ETH USD value", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
-plt.ylabel("count")
+plt.ylabel("Ethereum and Bitcoin USD value")
 plt.xlabel("Date progression")
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.savefig("extract/Correlation-ETH.png")
+plt.legend(loc='upper right');
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+plt.savefig("extract/Correlation-ETH.png",dpi=300)
+plt.show()
 plt.clf()
 
 print "Correlation plot [------] "
 
 
-# In[17]:
+# In[129]:
 
 txns=[float(i.txns)/20 for i in corrected_df.sort(asc("dt")).collect()]
-plt.plot(txns, label="ETH treansaction count", linestyle='--')
+plt.plot(txns, label="ETH transaction count", linestyle='--')
 plt.plot(aaclose, label="Bitcoin USD value")
-plt.ylabel("count")
+plt.ylabel("Ethereum transaction count and Bitcoin USD value")
 plt.xlabel("Date progression")
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.savefig("extract/Correlation-ETHtxns.png")
+plt.legend(loc='upper right');
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+plt.savefig("extract/Correlation-ETHtxns.png",dpi=300)
+plt.show()
 plt.clf()
 
 
-# In[18]:
+# In[130]:
 
 print "All plots are exported to "+str(cwd)+'/'+'extract'+" folder"
 print "Model initiated - Random Forest "
 
 
-# In[19]:
+# In[131]:
 
 
 df=corrected_df.select([c for c in corrected_df.columns if c not in {'dt','dt_e','dt_sp','cnt','price','txns','high','low','open'}])
@@ -282,25 +303,36 @@ print("MAE = %s" % metrics.meanAbsoluteError)
 
 
 
-# In[20]:
+# In[132]:
 
 predict=labelsAndPredictions.sortByKey().map(lambda a:a[1]).collect()
 label=labelsAndPredictions.sortByKey().map(lambda a:a[0]).collect()
 x=range(int(labelsAndPredictions.count()))
 
+
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
+
 ax1.scatter(x, label, s=10, c='b', marker="|", label='Test price')
 ax1.scatter(x,predict, s=10, c='r', marker="|", label='Predicted price')
+plt.ylabel("Bitcoin USD value")
+plt.xlabel("Labelled point sequence number")
 plt.legend(loc='upper left');
-
-
-# In[21]:
-
+plt.title('Random Forest Scatterplot')
+plt.savefig("extract/Randomforestscatterplot.png",dpi=300)
 plt.show()
+plt.clf()
 
 
-# In[22]:
+# In[ ]:
+
+
+
+
+# In[133]:
 
 print "Model initiated - GBT "
 
@@ -324,20 +356,30 @@ print("R-squared = %s" % metrics.r2)
 print("MAE = %s" % metrics.meanAbsoluteError)
 
 
-# In[23]:
+# In[134]:
 
 predict1=labelsAndPredictions1.sortByKey().map(lambda a:a[1]).collect()
 label1=labelsAndPredictions1.sortByKey().map(lambda a:a[0]).collect()
 x=range(int(labelsAndPredictions.count()))
 
+
+
+figure = plt.gcf() # get current figure
+figure.set_size_inches(8, 6)
+
+
 fig = plt.figure()
 ax2 = fig.add_subplot(111)
 ax2.scatter(x, label1, s=10, c='b', marker="|", label='Test price')
 ax2.scatter(x,predict1, s=10, c='r', marker="|", label='Predicted price')
+plt.ylabel("Bitcoin USD value")
+plt.xlabel("Labelled point sequence number")
 plt.legend(loc='upper left');
+plt.title('GBT Scatterplot')
+plt.savefig("extract/GBTscatterplot.png",dpi=300)
 
 
-# In[24]:
+# In[135]:
 
 plt.show()
 
